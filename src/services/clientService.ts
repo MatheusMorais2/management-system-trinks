@@ -1,5 +1,5 @@
 import clientRepository, { Client } from "../repositories/clientRepository.js";
-import { duplicateError } from "../utils/errors.js";
+import { duplicateError, internalServerError } from "../utils/errors.js";
 
 async function findAll() {
   const clients = await clientRepository.findAll();
@@ -10,7 +10,8 @@ async function createClient(clientData: Omit<Client, "id">) {
   const clientSearch = await clientRepository.findByCNPJ(clientData.cnpj);
   if (clientSearch) throw duplicateError("Client");
 
-  return await clientRepository.createClient(clientData);
+  const client = await clientRepository.createClient(clientData);
+  if (!client) throw internalServerError();
 }
 
 export default {

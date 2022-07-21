@@ -21,7 +21,14 @@ export function duplicateError(entity: string) {
 
 export function badRequest(entity: string) {
   return {
-    type: "error_request",
+    type: "error_bad_request",
     message: `${entity} is in a incorrect format`,
+  };
+}
+
+export function internalServerError() {
+  return {
+    type: "error_internal",
+    message: "Internal server error",
   };
 }

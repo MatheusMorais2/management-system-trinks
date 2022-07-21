@@ -5,8 +5,7 @@ import { Client } from "../repositories/clientRepository.js";
 export async function createClient(req: Request, res: Response) {
   const clientData: Client = req.body;
 
-  const response = await clientService.createClient(clientData);
-  if (!response) res.send("Error creating client").status(500);
+  await clientService.createClient(clientData);
 
   return res.sendStatus(201);
 }
