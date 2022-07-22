@@ -10,21 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Client {
+model client {
   id      Int       @id @default(autoincrement())
   name    String
   cnpj    String    @unique @db.VarChar(14)
   state   String
-  Process Process[]
+  process process[]
 }
 
-model Process {
+model process {
   id       Int      @id @default(autoincrement())
   number   String   @unique
   value    Int
   state    String
   date     DateTime
   isActive Boolean
-  Client   Client   @relation(references: [cnpj], fields: [clientCNPJ])
+  client   client   @relation(references: [cnpj], fields: [clientCNPJ])
   clientCNPJ String
 }

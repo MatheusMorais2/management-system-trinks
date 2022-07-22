@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export type Sum = {
   value: boolean;
 };
@@ -23,6 +25,7 @@ export interface QuerySelectors {
   clientCNPJ?: string;
   gt?: number;
   lt?: number;
+  month?: string;
 }
 
 export type TextSearch = {
@@ -45,6 +48,7 @@ export interface WhereSelectors {
   state?: string;
   clientCNPJ?: string;
   number?: IdNumber;
+  date?: Date;
 }
 
 export function selectorBuilding(
@@ -87,5 +91,6 @@ export function selectorBuilding(
       number: { contains: querySelectors.text },
     };
   }
+
   return selector;
 }

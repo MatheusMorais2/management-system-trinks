@@ -9,3 +9,8 @@ export async function createClient(req: Request, res: Response) {
 
   return res.sendStatus(201);
 }
+
+export async function findAllClients(req: Request, res: Response) {
+  const clients = clientService.findAll();
+  return res.send(clients).status(200);
+}
