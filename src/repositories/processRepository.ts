@@ -25,6 +25,18 @@ async function findByNumber(number: string) {
   });
 }
 
+async function findProcesses(selector) {
+  return prisma.process.findMany({ ...selector });
+}
+
+async function findProcessesByClient(selector) {
+  return prisma.client.findMany({
+    include: {
+      Process: { where: selector },
+    },
+  });
+}
+
 async function create(processData: ProcessCreationInterface) {
   const process = await prisma.process.create({
     data: {
@@ -39,38 +51,28 @@ async function create(processData: ProcessCreationInterface) {
   return process;
 }
 
-type Sum = {
-  _sum: {
-    value: BigInt;
-  };
-};
+async function sumProcesses(selector) {
+  const sum = await prisma.process.aggregate({ ...selector });
+  return sum;
+}
 
-async function sumAllProcesses(clientCNPJ: string) {
-  let sum: Sum;
+async function averageProcesses(selector) {
+  const average = await prisma.process.aggregate({ ...selector });
+  return average;
+}
 
-  if (clientCNPJ) {
-    sum = await prisma.process.aggregate({
-      where: {
-        clientCNPJ,
-      },
-      _sum: {
-        value: true,
-      },
-    });
-  } else {
-    sum = await prisma.process.aggregate({
-      _sum: {
-        value: true,
-      },
-    });
-  }
-
-  return sum._sum.value.toString();
+async function countProcesses(selector) {
+  const count = await prisma.process.count({ ...selector });
+  return count;
 }
 
 export default {
   findAll,
   findByNumber,
+  findProcesses,
+  findProcessesByClient,
   create,
-  sumAllProcesses,
+  sumProcesses,
+  averageProcesses,
+  countProcesses,
 };

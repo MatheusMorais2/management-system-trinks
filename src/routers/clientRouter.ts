@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidationMiddleware.js";
-import errorHandlingMiddleware from "../middlewares/errorHandlingMiddleware.js";
 import { createClient } from "../controllers/clientController.js";
 import clientCreationSchema from "../schemas/clientCreationSchema.js";
 
