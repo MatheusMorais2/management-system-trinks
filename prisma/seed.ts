@@ -1,6 +1,8 @@
-import { prisma } from "../src/database";
+import { prisma } from "../src/database.js";
+import dayjs from "dayjs";
 
 async function main() {
+  console.log(dayjs("10/10/2007", "DD/MM/YYYY").toDate());
   await prisma.client.upsert({
     where: {
       cnpj: "00000000001",
@@ -35,7 +37,7 @@ async function main() {
       clientCNPJ: "00000000001",
       state: "Rio de Janeiro",
       value: 20000000,
-      date: "10/10/2007",
+      date: dayjs("10/10/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -50,7 +52,7 @@ async function main() {
       clientCNPJ: "00000000001",
       state: "São Paulo",
       value: 10000000,
-      date: "20/10/2007",
+      date: dayjs("20/10/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -62,11 +64,11 @@ async function main() {
     update: {},
     create: {
       number: "00003TRABM",
-      clientCNPJ: "00000000001",
-      state: "Minas Gerais",
       value: 1000000,
-      date: "30/10/2007",
+      state: "Minas Gerais",
+      date: dayjs("30/10/2007", "DD/MM/YYYY").toDate(),
       isActive: false,
+      clientCNPJ: "00000000001",
     },
   });
 
@@ -80,7 +82,7 @@ async function main() {
       clientCNPJ: "00000000001",
       state: "Rio de Janeiro",
       value: 2000000,
-      date: "10/11/2007",
+      date: dayjs("10/11/2007", "DD/MM/YYYY").toDate(),
       isActive: false,
     },
   });
@@ -95,7 +97,7 @@ async function main() {
       clientCNPJ: "00000000001",
       state: "São Paulo",
       value: 3500000,
-      date: "15/11/2007",
+      date: dayjs("15/11/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -110,7 +112,7 @@ async function main() {
       clientCNPJ: "00000000002",
       state: "Rio de Janeiro",
       value: 2000000,
-      date: "1/5/2007",
+      date: dayjs("1/5/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -125,7 +127,7 @@ async function main() {
       clientCNPJ: "00000000002",
       state: "Rio de Janeiro",
       value: 70000000,
-      date: "2/6/2007",
+      date: dayjs("2/6/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -140,7 +142,7 @@ async function main() {
       clientCNPJ: "00000000002",
       state: "São Paulo",
       value: 50000,
-      date: "3/7/2007",
+      date: dayjs("3/7/2007", "DD/MM/YYYY").toDate(),
       isActive: false,
     },
   });
@@ -155,7 +157,7 @@ async function main() {
       clientCNPJ: "00000000002",
       state: "São Paulo",
       value: 3200000,
-      date: "4/8/2007",
+      date: dayjs("4/8/2007", "DD/MM/YYYY").toDate(),
       isActive: true,
     },
   });
@@ -170,14 +172,16 @@ async function main() {
       clientCNPJ: "00000000002",
       state: "Amazonas",
       value: 100000,
-      date: "5/9/2007",
+      date: dayjs("5/9/2007", "DD/MM/YYYY").toDate(),
       isActive: false,
     },
   });
+  console.log("chegou no ultimo main");
 }
 
 main()
   .catch((e) => {
+    console.log("chegou no catch");
     console.log(e);
     process.exit(1);
   })

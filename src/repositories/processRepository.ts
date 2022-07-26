@@ -32,7 +32,7 @@ async function findProcesses(selector) {
 async function findProcessesByClient(selector) {
   return prisma.client.findMany({
     include: {
-      Process: { where: selector },
+      process: { where: selector },
     },
   });
 }

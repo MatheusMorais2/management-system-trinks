@@ -5,11 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "dotenv -e .env.test prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "start": "nodemon src/app.ts"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
   },
   "repository": {
     "type": "git",
